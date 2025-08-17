@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABC Fitness Studio — About Us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div id="logo-area">
+        <img src="images/logo.svg" alt="ABC Fitness Studio Logo" width="64" height="64">
+        <h1>ABC Fitness Studio</h1>
+      </div>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a> |
+        <a href="gallery.html">Gallery</a> |
+        <a href="about.html" aria-current="page">About Us</a> |
+        <a href="custom.html">Community</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section>
+        <h2>About Our Studio</h2>
+        <p>Local fitness studio offering group classes, personal training, and open gym.</p>
+        <h3>Business Hours</h3>
+        <ul>
+          <li>Mon–Fri: 6:00 AM – 9:00 PM</li>
+          <li>Sat: 8:00 AM – 6:00 PM</li>
+          <li>Sun: 8:00 AM – 2:00 PM</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Feedback & Custom Orders</h2>
+        <form id="feedback-form" class="form-grid">
+          <fieldset>
+            <legend>Contact Details</legend>
+            <label for="name">Name:</label>
+            <input id="name" name="name" type="text" required>
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="email" required>
+          </fieldset>
+
+          <fieldset>
+            <legend>Feedback</legend>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </fieldset>
+
+          <fieldset>
+            <legend>Custom Order</legend>
+            <label for="product">Product/Service:</label>
+            <input id="product" name="product" type="text" required>
+            <label for="quantity">Quantity:</label>
+            <input id="quantity" name="quantity" type="number" min="1" value="1" required>
+          </fieldset>
+
+          <p><button type="submit">Submit</button></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap"><small>© ABC Fitness Studio</small></div>
+  </footer>
+
+  <script>
+    document.getElementById('feedback-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const entry = {
+        name: name.value.trim(),
+        email: email.value.trim(),
+        message: message.value.trim(),
+        product: product.value.trim(),
+        quantity: parseInt(quantity.value,10)||1,
+        ts: Date.now()
+      };
+      const list = JSON.parse(localStorage.getItem('feedback') || '[]');
+      list.push(entry);
+      localStorage.setItem('feedback', JSON.stringify(list));
+      alert('Thanks for your feedback/custom order!');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
