@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABC Fitness Studio — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div id="logo-area">
+        <img src="images/logo.svg" alt="ABC Fitness Studio Logo" width="64" height="64">
+        <h1>ABC Fitness Studio</h1>
+      </div>
+      <nav aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a> |
+        <a href="gallery.html">Gallery</a> |
+        <a href="about.html">About Us</a> |
+        <a href="custom.html">Community</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero-grid">
+        <div class="feature">
+          <h2>Client Highlights</h2>
+          <ul>
+            <li>Certified trainers</li>
+            <li>Group classes</li>
+            <li>Open gym access</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h2>Shopping Promos</h2>
+          <ul>
+            <li>New Member Bundle</li>
+            <li>Protein Pack Discount</li>
+            <li>Spring Fitness Sale</li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Featured Products</h2>
+      <div class="features-grid">
+        <figure class="card">
+          <img src="images/product1.svg" alt="Protein Powder">
+          <figcaption>Protein Powder</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="images/product2.svg" alt="Gym Gloves">
+          <figcaption>Gym Gloves</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="images/product3.svg" alt="Resistance Bands">
+          <figcaption>Resistance Bands</figcaption>
+        </figure>
+      </div>
+
+      <section class="features-grid">
+        <div class="feature">
+          <h2>Shopping Perks</h2>
+          <ul><li>Free pickup</li><li>Member discounts</li><li>Easy returns</li></ul>
+        </div>
+        <div class="feature">
+          <h2>Categories</h2>
+          <ul><li>Supplements</li><li>Apparel</li><li>Accessories</li></ul>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <section>
+        <h2>Subscribe to Our Newsletter</h2>
+        <form id="newsletter-form">
+          <label for="newsletter-email">Email:</label>
+          <input id="newsletter-email" name="email" type="email" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </section>
+      <section>
+        <h2>Follow Us</h2>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">X</a></li>
+        </ul>
+      </section>
+      <nav aria-label="Footer navigation">
+        <a href="index.html" aria-current="page">Home</a> |
+        <a href="gallery.html">Gallery</a> |
+        <a href="about.html">About Us</a> |
+        <a href="custom.html">Community</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('newsletter-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('newsletter-email').value.trim();
+      if (!email) return;
+      const list = JSON.parse(localStorage.getItem('newsletter') || '[]');
+      list.push({ email, ts: Date.now() });
+      localStorage.setItem('newsletter', JSON.stringify(list));
+      alert('Subscribed!');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
