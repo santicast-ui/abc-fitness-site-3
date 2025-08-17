@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABC Fitness Studio — Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div id="logo-area">
+        <img src="images/logo.svg" alt="ABC Fitness Studio Logo" width="64" height="64">
+        <h1>ABC Fitness Studio</h1>
+      </div>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a> |
+        <a href="gallery.html" aria-current="page">Gallery</a> |
+        <a href="about.html">About Us</a> |
+        <a href="custom.html">Community</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <p><button id="view-cart-btn" type="button">View Cart</button></p>
+      <h2>Products</h2>
+      <table>
+        <thead>
+          <tr><th>Image</th><th>Item</th><th>Description</th><th>Price (USD)</th><th>Add</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="images/product1.svg" alt="Protein Powder" width="120" height="120"></td>
+            <td>Protein Powder</td><td>Whey blend, 2 lb</td><td>39.99</td>
+            <td><button type="button" onclick="addToCart('p1','Protein Powder',39.99)">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td><img src="images/product2.svg" alt="Gym Gloves" width="120" height="120"></td>
+            <td>Gym Gloves</td><td>Breathable, size M</td><td>19.99</td>
+            <td><button type="button" onclick="addToCart('p2','Gym Gloves',19.99)">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td><img src="images/product3.svg" alt="Resistance Bands" width="120" height="120"></td>
+            <td>Resistance Bands</td><td>Set of 3</td><td>24.99</td>
+            <td><button type="button" onclick="addToCart('p3','Resistance Bands',24.99)">Add to Cart</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <section aria-labelledby="cart-heading">
+        <h2 id="cart-heading">Cart</h2>
+        <div id="cart-output" class="cart-box">Cart is empty.</div>
+        <p>
+          <button type="button" id="clear-cart-btn">Clear Cart</button>
+          <button type="button" id="process-order-btn">Process Order</button>
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <small>© ABC Fitness Studio</small>
+    </div>
+  </footer>
+
+  <script>
+    function getCart(){ return JSON.parse(localStorage.getItem('cart') || '[]'); }
+    function setCart(c){ localStorage.setItem('cart', JSON.stringify(c)); }
+    function addToCart(id,name,price){ const c=getCart(); c.push({id,name,price,qty:1}); setCart(c); alert('Item added.'); }
+    function renderCart(){
+      const el=document.getElementById('cart-output'); const c=getCart();
+      if(c.length===0){ el.textContent='Cart is empty.'; return; }
+      let total=0; const lines=c.map((it,i)=>{ total+=it.price*(it.qty||1); return `${i+1}. ${it.name} — $${it.price.toFixed(2)}`;});
+      lines.push(`Total: $${total.toFixed(2)}`); el.textContent=lines.join('\n');
+    }
+    function clearCart(){ setCart([]); renderCart(); }
+    function processOrder(){ if(getCart().length===0){ alert('Cart is empty.'); return; } clearCart(); alert('Thank you for your order.'); }
+    document.getElementById('view-cart-btn').addEventListener('click', renderCart);
+    document.getElementById('clear-cart-btn').addEventListener('click', clearCart);
+    document.getElementById('process-order-btn').addEventListener('click', processOrder);
+  </script>
+</body>
+</html>
